@@ -1,0 +1,24 @@
+{
+  "name": "sendbird-nodejs",
+  "version": "0.0.1",
+  "description": "Thin wrapper around SendBird Server REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kfiroo/sendbird-nodejs.git"
+  },
+  "keywords": [
+    "sendbird",
+    "node",
+    "nodejs"
+  ],
+  "author": "kfiroo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kfiroo/sendbird-nodejs/issues"
+  },
+  "homepage": "https://github.com/kfiroo/sendbird-nodejs#readme"
+}
