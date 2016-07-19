@@ -26,7 +26,7 @@ module.expors = function makeAction(apiToken, endpoint, action) {
                     return;
                 }
                 if (body && body.error) {
-                    reject(err);
+                    reject(body);
                     return;
                 }
                 resolve(body);
