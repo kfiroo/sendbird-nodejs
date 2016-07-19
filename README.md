@@ -8,6 +8,7 @@ Thin wrapper around SendBird Server REST API
 
 ## Usage
 See [SendBird Documentation](https://docs.sendbird.com/platform) for payload and response details.
+You don't need to pass the `auth` field on the payload, you provide it when creating a new instance of `SendBird` and it is attached to all requests.
 
 ```javascript
 var SendBird = require('sendbird-nodejs');
