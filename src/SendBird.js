@@ -15,11 +15,11 @@ function SendBird(apiToken) {
     if (!apiToken) {
         throw new Error('Invalid api token');
     }
-    this.adminService = createService(apiToken, adminService);
-    this.channelService = createService(apiToken, channelService);
-    this.messagingService = createService(apiToken, messagingService);
-    this.migrationService = createService(apiToken, migrationService);
-    this.userService = createService(apiToken, userService);
+    this.admin = createService(apiToken, adminService);
+    this.channel = createService(apiToken, channelService);
+    this.messaging = createService(apiToken, messagingService);
+    this.migration = createService(apiToken, migrationService);
+    this.user = createService(apiToken, userService);
 }
 
 module.exports = SendBird;
