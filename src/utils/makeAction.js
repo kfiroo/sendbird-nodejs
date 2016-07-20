@@ -4,7 +4,7 @@ var _ = require('lodash');
 var request = require('request');
 var Promise = require('bluebird');
 
-module.expors = function makeAction(apiToken, endpoint, action) {
+module.exports = function makeAction(apiToken, endpoint, action) {
 
     return function (payload) {
 

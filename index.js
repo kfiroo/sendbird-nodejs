@@ -1,3 +1,5 @@
 'use strict';
 
-module.expors = require('./src/SendBird');
+var SendBird = require('./src/SendBird');
+
+module.exports = SendBird;

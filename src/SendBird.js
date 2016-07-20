@@ -22,4 +22,4 @@ function SendBird(apiToken) {
     this.userService = createService(apiToken, userService);
 }
 
-module.expors = SendBird;
+module.exports = SendBird;

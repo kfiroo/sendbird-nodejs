@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 var makeAction = require('./makeAction');
 
-module.expors = function createService(apiToken, service) {
+module.exports = function createService(apiToken, service) {
     var actions = service.getActions();
     var endpoint = service.getEndpoint();
 
