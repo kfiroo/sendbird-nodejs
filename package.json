@@ -1,6 +1,6 @@
 {
   "name": "sendbird-nodejs",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Thin wrapper around SendBird Server REST API",
   "main": "index.js",
   "scripts": {
