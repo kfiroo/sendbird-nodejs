@@ -26,7 +26,7 @@ module.exports = function makeAction(apiToken, endpoint, action) {
                     return;
                 }
                 if (body && body.error) {
-                    reject(body);
+                    reject(new Error(body.message || body));
                     return;
                 }
                 resolve(body);
