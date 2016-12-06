@@ -1,25 +1,35 @@
 'use strict';
 
-var createService = require('./utils/createService');
+const rp = require('request-promise');
 
-var adminService = require('./services/adminService');
-var channelService = require('./services/channelService');
-var messagingService = require('./services/messagingService');
-var migrationService = require('./services/migrationService');
-var userService = require('./services/userService');
+const DEFAULT_BASE_URL = 'https://api.sendbird.com/v3/';
 
-function SendBird(apiToken) {
-    if (!(this instanceof SendBird)) {
-        return new SendBird(apiToken);
-    }
+// users
+const usersService = require('./services/users');
+// open channel
+const openChannelsService = require('./services/openChannels');
+// group channel
+const groupChannelsService = require('./services/groupChannels');
+
+function SendBird(apiToken, baseUrl = DEFAULT_BASE_URL) {
     if (!apiToken) {
         throw new Error('Invalid api token');
     }
-    this.admin = createService(apiToken, adminService);
-    this.channel = createService(apiToken, channelService);
-    this.messaging = createService(apiToken, messagingService);
-    this.migration = createService(apiToken, migrationService);
-    this.user = createService(apiToken, userService);
+    const request = rp.defaults({
+        baseUrl,
+        headers: {
+            'Api-Token': apiToken
+        },
+        json: true
+    });
+
+    const api = {};
+
+    api.users = usersService(request);
+    api.openChannels = openChannelsService(request);
+    api.groupChannels = groupChannelsService(request);
+
+    return api;
 }
 
 module.exports = SendBird;

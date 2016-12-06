@@ -1,5 +1,5 @@
 'use strict';
 
-var SendBird = require('./src/SendBird');
+const SendBird = require('./SendBird');
 
 module.exports = SendBird;

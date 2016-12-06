@@ -1,39 +1,43 @@
 'use strict';
 
-var _ = require('lodash');
-var request = require('request');
-var Promise = require('bluebird');
+const _ = require('lodash');
 
-module.exports = function makeAction(apiToken, endpoint, action) {
+const endpointParser = require('./endpointParser');
 
-    return function (payload) {
+const {
+    GET
+} = require('../constants/requestTypes');
 
-        return new Promise(function (resolve, reject) {
-            
-            var options = {
-                json: true,
-                url: action.url,
-                method: action.method,
-                baseUrl: endpoint,
-                body: _.assign({
-                    auth: apiToken
-                }, payload)
-            };
-            
-            request(options, function (err, res, body) {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                if (body && body.error) {
-                    reject(new Error(body.message || body));
-                    return;
-                }
-                resolve(body);
-            });
-            
-        });
+module.exports = function makeAction(request, endpointPrefix, name, options) {
 
+    const endpoint = endpointPrefix + options.endpoint;
+
+    const controller = endpointParser.parse(endpoint);
+
+    return function doAction() {
+        const args = Array.prototype.slice.call(arguments);
+        const hasPayload = _.isPlainObject(_.last(args));
+        const payload = hasPayload ? _.last(args) : null;
+        const params = hasPayload ? _.initial(args) : args;
+
+        if (params.length !== controller.args.length) {
+            throw new Error(`Invalid arguments number: [${name}] expects [${controller.args.length}] arguments but received [${params.length}]`);
+        }
+
+        const reqParams = {
+            method: options.method,
+            url: controller.compile(args)
+        };
+
+        if (hasPayload) {
+            if (options.method === GET) {
+                reqParams.qs = payload;
+            } else {
+                reqParams.body = payload;
+            }
+        }
+
+        return request(reqParams);
     };
 
 };

@@ -1,12 +1,11 @@
 'use strict';
 
-var _ = require('lodash');
+const _ = require('lodash');
 
-var makeAction = require('./makeAction');
+const makeAction = require('./makeAction');
 
-module.exports = function createService(apiToken, service) {
-    var actions = service.getActions();
-    var endpoint = service.getEndpoint();
-
-    return _.mapValues(actions, _.partial(makeAction, apiToken, endpoint));
+module.exports = function createService(request, endpointPrefix, actions) {
+    return _.mapValues(actions, (options, name) => {
+        return makeAction(request, endpointPrefix, name, options);
+    });
 };
