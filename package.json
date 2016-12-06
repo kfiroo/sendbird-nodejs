@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Thin wrapper around SendBird Server REST API v3",
   "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "babel src -d dist",
     "test": "mocha --compilers js:babel-register"
